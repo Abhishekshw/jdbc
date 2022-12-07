@@ -88,6 +88,7 @@ public class Banking {// banking class here all method avaiable
 	}
 
 	public static void deposite() throws SQLException {
+		count = 0;
 		Scanner S = new Scanner(System.in);
 		System.out.println("enter Ac no");
 		int Ac_no = S.nextInt();
@@ -106,6 +107,7 @@ public class Banking {// banking class here all method avaiable
 					count++;
 				}
 				if (count == 0) {// if id is not avaible its will throw an error
+					System.out.println(count);
 					throw new InvalidAcno("invalid ac no");
 				}
 			}
@@ -126,7 +128,7 @@ public class Banking {// banking class here all method avaiable
 																												// account
 																												// balance
 			} else {// if password willnot match it will throw an error
-				throw new InvalidPassWord("you have entered wrong password");
+				throw new InvalidPassWord("you have entered wrong password ");
 			}
 			System.out.println("your total balance is " + totalbal);// updated balance
 		} catch (Exception e) {
@@ -135,6 +137,7 @@ public class Banking {// banking class here all method avaiable
 	}
 
 	public static void Withdraw() throws SQLException {
+		count = 0;
 		Scanner S = new Scanner(System.in);
 		System.out.println("enter Ac no");
 		int Ac_no = S.nextInt();// Scanner input from user
@@ -146,15 +149,7 @@ public class Banking {// banking class here all method avaiable
 		Statement stmt1 = conn.createStatement();
 		ResultSet rs2 = stmt1.executeQuery("Select * from bank");// fecting datr from data base
 		try {
-			while (rs2.next()) {
-				oldAc = (rs2.getInt(1));
-				if (Ac_no == oldAc) {// cheking account no is exist or not
-					count++;
-				}
-				if (count == 0) {// if not match it will trow an error
-					throw new InvalidAcno("invalid ac no");
-				}
-			}
+
 			Statement stmt = conn.createStatement();
 			// exicuting fetch data from database
 			Statement stmt2 = conn.createStatement();
@@ -164,6 +159,7 @@ public class Banking {// banking class here all method avaiable
 				oldAc = (rs3.getInt(1));
 				if (Ac_no == oldAc) {// creating coustom exception
 					count++;
+					System.out.println(count);
 				}
 				if (count == 0) {
 					throw new InvalidAcno("invalid ac no");// if not match it will trow an error
@@ -196,6 +192,7 @@ public class Banking {// banking class here all method avaiable
 	}
 
 	public static void Showbal() throws SQLException {
+
 		Scanner S = new Scanner(System.in);
 		System.out.println("enter Ac no");
 		int Ac_no = S.nextInt();
@@ -227,15 +224,18 @@ public class Banking {// banking class here all method avaiable
 					System.out.println("your balanxce is " + rs1.getInt(1));// output for viewe balance
 				}
 			} else {// if password not match it will throw exception
-				throw new InvalidPassWord("you have entered invalid password");
+				throw new InvalidPassWord("you have entered invalid  password");
 			}
-		} catch (Exception e) {
+		} catch (
+
+		Exception e) {
 			System.out.println(e);// printing Exception msg
 		}
 
 	}
 
 	public static void closeAc() throws SQLException {
+		count = 0;
 		Scanner S = new Scanner(System.in);
 		System.out.println("enter Ac no");
 		int Ac_no = S.nextInt();
@@ -264,7 +264,7 @@ public class Banking {// banking class here all method avaiable
 				stmt.executeUpdate("delete from bank where account_no=" + Ac_no);// deleting record
 				System.out.println("Ac closed ");
 			} else {// if password not match it will throw an exception
-				throw new InvalidPassWord("you have entered invalid password");
+				throw new InvalidPassWord("you have entered invalid  password");
 			}
 
 		} catch (Exception e) {
@@ -273,6 +273,7 @@ public class Banking {// banking class here all method avaiable
 	}
 
 	public static void pinchange() throws SQLException {
+		count = 0;
 		Scanner S = new Scanner(System.in);
 		System.out.println("enter Ac no");
 		int Ac_no = S.nextInt();
@@ -288,6 +289,7 @@ public class Banking {// banking class here all method avaiable
 				oldAc = (rs2.getInt(1));
 				if (Ac_no == oldAc) {// cheking ac no is avaible or not
 					count++;
+					System.out.println(count);
 				}
 				if (count == 0) { // if acno is not avaiable the throw ann error
 					throw new InvalidAcno("invalid ac no");
@@ -302,7 +304,7 @@ public class Banking {// banking class here all method avaiable
 				stmt.executeUpdate("update bank set pin='  " + Npin + "  'where account_no=" + Ac_no);// updating pin
 				System.out.println("pin changed ");
 			} else {
-				throw new InvalidPassWord("you have entered invalid password");
+				throw new InvalidPassWord("you have entered invalid  password");
 			}
 		} catch (Exception e) {
 			System.out.println(e);
